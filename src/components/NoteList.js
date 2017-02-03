@@ -3,11 +3,14 @@ import { ListGroup } from 'react-bootstrap';
 
 import NoteItem from './NoteItem';
 
-const NoteList = function(props) {
+const NoteList = function({notes, onNoteSelect}) {
+  if (!notes) {
+    return <div>Enter your first note</div>
+  }
 
-  let renderItems = props.notes.map(note => {
+  let renderItems = notes.map(note => {
     return (
-      <NoteItem key={note.id}  id={note.id} note={note} onClick={props.onClick}/>
+      <NoteItem key={note.id} id={note.id} note={note} onNoteSelect={onNoteSelect}/>
     );
   });
 

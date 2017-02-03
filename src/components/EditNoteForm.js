@@ -5,12 +5,11 @@ class EditNoteForm extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      value: ''
-    }
+    this.state = {value: ''}
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
 
   handleChange(event) {
     this.setState({ value: event.target.value });
@@ -18,8 +17,9 @@ class EditNoteForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.onUpdateNote();
-    this.setState({ value: ''})
+    let updatedNote = event.target.value  
+    let id = this.state.selectedNote.id; // Cannot read property id of undefined
+    this.props.updateNote(id, updatedNote);
   }
 
   render() {
@@ -30,6 +30,7 @@ class EditNoteForm extends Component {
           <FormControl 
             componentClass="textarea" 
             placeholder="Edit Note" 
+            value={this.state.value}
             onChange={this.handleChange}/>
         </FormGroup>
         <Button type="submit" bsSize="small">Update</Button>
