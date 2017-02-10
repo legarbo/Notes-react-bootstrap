@@ -19,9 +19,11 @@ class CreateNoteForm extends Component {
   }
 
   handleSubmit(event) {
-  event.preventDefault();
-  this.props.createNote(this.state.value);
-  this.setState({value: ''})
+    event.preventDefault();
+    if (this.state.value.length !== 0) {
+      this.props.createNote(this.state.value);
+    }
+    this.setState({value: ''})
   }
 
   render() {

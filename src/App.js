@@ -77,7 +77,10 @@ class App extends Component {
         />
         <NoteList 
           notes={notes} 
-          onNoteSelect={(selectedNote) => noteSelect(selectedNote)}/>
+          onNoteSelect={(selectedNote) => noteSelect(selectedNote)}
+          isEditing={isEditing}
+          removeNote={(id) => removeNote(id)}
+        />
       </div>
     );
   }

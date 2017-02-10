@@ -26,7 +26,9 @@ class EditNoteForm extends Component {
   handleUpdate() {
     const id = this.props.selectedNote.id;
     const text = this.state.value;
-    this.props.updateNote(id, text);
+    if (text && text.length !== 0) {
+      this.props.updateNote(id, text);
+    }
   }
 
   render() {
