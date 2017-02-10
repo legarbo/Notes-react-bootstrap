@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { v4 } from 'node-uuid';
 import logo from './logo.svg';
 import NoteCreEdit from './components/NoteCreEdit';
 import NoteList from './components/NoteList';
@@ -11,44 +12,57 @@ class App extends Component {
     this.state =  {
       notes: [],
       isEditing: false,
+      selectedNote: null
     }
     this.createNote = this.createNote.bind(this);
     this.updateNote = this.updateNote.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
+    this.noteSelect = this.noteSelect.bind(this);
+    this.removeNote = this.removeNote.bind(this);
   }
   createNote(text) {
-    var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
-    var newNote = {id: id, text: text};
-    var state = this.state.notes;
-    var newNotesState = [...state, newNote]
+    const notes = [
+      ...this.state.notes,
+      {
+        id: v4(),
+        text
+      }
+    ]
     this.setState({
-      notes: newNotesState 
+      notes: notes 
     });
   }
-  handleEdit() {
+  noteSelect(selectedNote) {
     this.setState({
+      selectedNote: selectedNote,
       isEditing: true
     });
   }
 
   updateNote(id, text) {
-    var notes = this.state.notes;
-    var updatedNotes = [];
-    updatedNotes = notes.map(note => {
-      if(note.id === id) {
-        note.text = text;
-        note.id = id;
-      }
-      return updatedNotes;
-    });
+    const notes = this.state.notes.map(note => 
+      (note.id !== id) ?
+        note :
+        {
+          ...note,
+          text
+        }
+    );
     this.setState({
-      notes: updatedNotes,
+      notes: notes,
       isEditing: false,
       selectedNote: null
     });
   }
 
+  removeNote(id) {
+    const notes = this.state.notes.filter(
+      note => note.id !== id
+    )
+    this.setState({notes})
+  }
   render() {
+    const { createNote, updateNote, removeNote, noteSelect } = this
+    const { notes, isEditing, selectedNote } = this.state
 
     return (
       <div className="App">
@@ -56,11 +70,14 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
         </div>
         <NoteCreEdit
-          isEditing={this.state.isEditing}
-          createNote={this.createNote}
-          updateNote={this.updateNote}
+          isEditing={isEditing}
+          createNote={createNote}
+          updateNote={updateNote}
+          selectedNote={selectedNote}
         />
-        <NoteList notes={this.state.notes} onNoteSelect={this.handleEdit}/>
+        <NoteList 
+          notes={notes} 
+          onNoteSelect={(selectedNote) => noteSelect(selectedNote)}/>
       </div>
     );
   }

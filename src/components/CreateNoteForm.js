@@ -8,19 +8,21 @@ class CreateNoteForm extends Component {
     this.state = {
       value: ''
     }
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
-
-  handleChange(event) {
+  componentDidMount() {
+    console.log('Component CreateNoteForm is Mounted');
+  }
+  handleOnChange(event) {
     this.setState({value: event.target.value});
   }
-  handleSubmit(e) {
-  e.preventDefault();
+
+  handleSubmit(event) {
+  event.preventDefault();
   this.props.createNote(this.state.value);
   this.setState({value: ''})
   }
-
 
   render() {
     return (
@@ -28,10 +30,10 @@ class CreateNoteForm extends Component {
         <FormGroup controlId="formControlsTextarea">
           <ControlLabel>Note Creation</ControlLabel>
           <FormControl 
-            componentClass="textarea" 
-            placeholder="Create Note" 
             value={this.state.value}
-            onChange={this.handleChange}/>
+            onChange={this.handleOnChange}
+            componentClass="textarea" 
+            placeholder="Create Note" />
         </FormGroup>
         <Button type="submit" bsSize="small">Create Note</Button>
       </form>

@@ -5,21 +5,28 @@ class EditNoteForm extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {value: ''}
+    this.state =  {
+      value: ''
+    }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
   }
-
-
+  componentDidMount() {
+    console.log('EditNoteForm did mount.')
+  }
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({value: event.target.value});
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    let updatedNote = event.target.value  
-    let id = this.state.selectedNote.id; // Cannot read property id of undefined
-    this.props.updateNote(id, updatedNote);
+    this.handleUpdate();
+  }
+  handleUpdate() {
+    const id = this.props.selectedNote.id;
+    const text = this.state.value;
+    this.props.updateNote(id, text);
   }
 
   render() {
@@ -27,11 +34,12 @@ class EditNoteForm extends Component {
       <form onSubmit={this.handleSubmit}>
         <FormGroup controlId="formControlsTextarea">
           <ControlLabel>Note Edition</ControlLabel>
-          <FormControl 
-            componentClass="textarea" 
-            placeholder="Edit Note" 
+          <FormControl
             value={this.state.value}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            componentClass="textarea" 
+            placeholder="Edit note selected" 
+          />
         </FormGroup>
         <Button type="submit" bsSize="small">Update</Button>
       {/*<Button type="submit" bsSize="small">Cancel</Button> */} 
@@ -39,4 +47,5 @@ class EditNoteForm extends Component {
     );
   }
 }
+
 export default EditNoteForm;

@@ -1,24 +1,17 @@
 import React from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-import NoteItem from './NoteItem';
+import NoteListItem from './NoteListItem';
 
-const NoteList = function({notes, onNoteSelect}) {
-  if (!notes) {
-    return <div>Enter your first note</div>
-  }
+const NoteList = ({notes = [], onNoteSelect=f => f}) =>
 
-  let renderItems = notes.map(note => {
-    return (
-      <NoteItem key={note.id} id={note.id} note={note} onNoteSelect={onNoteSelect}/>
-    );
-  });
-
-  return (
-    <ListGroup>
-      { renderItems }
-    </ListGroup>
-  );
-}
-
+  <ListGroup>
+    {(notes.length === 0) ?
+      <p>No Notes Listed. (Add a Note)</p> :
+      notes.map(note =>
+        <NoteListItem key={note.id} note={note} 
+          onNoteSelect={ (note) => onNoteSelect(note)}/>
+      )
+    }
+  </ListGroup>
 export default NoteList;
