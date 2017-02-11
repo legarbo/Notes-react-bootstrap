@@ -15,6 +15,7 @@ class EditNoteForm extends Component {
   }
   componentDidMount() {
     console.log('EditNoteForm did mount.')
+    console.log(`Current note content: ${this.props.selectedNote.text}`)
   }
   handleChange(event) {
     this.setState({value: event.target.value});

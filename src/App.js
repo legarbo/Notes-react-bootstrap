@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { v4 } from 'node-uuid';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, PageHeader } from 'react-bootstrap';
 import logo from './logo.svg';
 import NoteCreEdit from './components/NoteCreEdit';
 import NoteList from './components/NoteList';
@@ -74,6 +74,7 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </div>
+    <PageHeader>Note App <small>Practical easy notetaking</small></PageHeader>
     <Grid>
         <Row className="show-grid">
           <Col xs={6} md={4}>
@@ -89,7 +90,6 @@ class App extends Component {
             <NoteList 
               notes={notes} 
               onNoteSelect={(selectedNote) => noteSelect(selectedNote)}
-              isEditing={isEditing}
               removeNote={(id) => removeNote(id)}
             />
           </Col>
