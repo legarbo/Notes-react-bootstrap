@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroupItem, Button } from 'react-bootstrap';
+import { Grid, Row, Col, Clearfix, ListGroupItem, Button } from 'react-bootstrap';
 
 
 class NoteListItem extends Component {
@@ -20,10 +20,25 @@ class NoteListItem extends Component {
     const { note } = this.props;
     return (
       <div>
-        <ListGroupItem onClick={() => this.handleClick(note)}>
-          {note.text}
-        </ListGroupItem><Button 
-          onClick={() => this.handleRemoveNote(note.id)}>Remove</Button>
+        <Grid>
+            <Row className="show-grid">
+              <Col xs={12} md={8}>
+                <ListGroupItem 
+                  onClick={() => this.handleClick(note)}>
+                  {note.text}
+                </ListGroupItem>
+                  {' '}
+              </Col>
+              <Clearfix visibleSmBlock></Clearfix>
+              <Col xs={6} md={4}>
+                <Button
+                  bsStyle="danger"
+                  onClick={() => this.handleRemoveNote(note.id)}>
+                    Remove
+                </Button>
+              </Col>
+            </Row>
+        </Grid>
       </div>
     )
   }

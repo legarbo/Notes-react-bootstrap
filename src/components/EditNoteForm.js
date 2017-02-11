@@ -11,6 +11,7 @@ class EditNoteForm extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.cancelUpdate = this.cancelUpdate.bind(this);
   }
   componentDidMount() {
     console.log('EditNoteForm did mount.')
@@ -30,6 +31,10 @@ class EditNoteForm extends Component {
       this.props.updateNote(id, text);
     }
   }
+  cancelUpdate() {
+    this.props.cancelUpdate();
+    this.setState({value: ''});
+  }
 
   render() {
     return (
@@ -44,7 +49,7 @@ class EditNoteForm extends Component {
           />
         </FormGroup>
         <Button type="submit" bsSize="small">Update</Button>
-      {/*<Button type="submit" bsSize="small">Cancel</Button> */} 
+        <Button type="submit" bsSize="small" onClick={this.cancelUpdate}>Cancel</Button>
       </form>
     );
   }
