@@ -30,7 +30,7 @@ class CreateNoteForm extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <FormGroup controlId="formControlsTextarea">
-          <ControlLabel>Note Creation</ControlLabel>
+          <ControlLabel>Note length unlimited</ControlLabel>
           <FormControl 
             value={this.state.value}
             onChange={this.handleOnChange}

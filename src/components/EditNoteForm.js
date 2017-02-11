@@ -39,19 +39,21 @@ class EditNoteForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <FormGroup controlId="formControlsTextarea">
-          <ControlLabel>Note Edition</ControlLabel>
-          <FormControl
-            value={this.state.value}
-            onChange={this.handleChange}
-            componentClass="textarea" 
-            placeholder="Edit note selected" 
-          />
-        </FormGroup>
-        <Button type="submit" bsSize="small">Update</Button>
-        <Button type="submit" bsSize="small" onClick={this.cancelUpdate}>Cancel</Button>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <FormGroup controlId="formControlsTextarea">
+            <ControlLabel>selected note will be replaced!</ControlLabel>
+            <FormControl
+              value={this.state.value}
+              onChange={this.handleChange}
+              componentClass="textarea" 
+              placeholder="Edit note selected" 
+            />
+          </FormGroup>
+          <Button type="submit" bsSize="small">Update</Button>
+          <Button type="submit" bsSize="small" onClick={this.cancelUpdate}>Cancel</Button>
+        </form>
+      </div>
     );
   }
 }
