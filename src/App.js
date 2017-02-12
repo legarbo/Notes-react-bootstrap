@@ -74,7 +74,7 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
         </div>
-    <PageHeader>Note App <small>Practical easy notetaking</small></PageHeader>
+    <PageHeader>Note App <small>Practical and easy notetaking</small></PageHeader>
     <Grid>
         <Row className="show-grid">
           <Col xs={6} md={4}>
