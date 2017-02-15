@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import { ButtonToolbar,Button, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 class EditNoteForm extends Component {
 
   constructor(props) {
     super(props);
     this.state =  {
-      value: ''
+      value: props.selectedNote.text || ''
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -42,7 +42,7 @@ class EditNoteForm extends Component {
       <div>
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="formControlsTextarea">
-            <ControlLabel>selected note will be replaced!</ControlLabel>
+            <ControlLabel>Partial o total note replacement</ControlLabel>
             <FormControl
               value={this.state.value}
               onChange={this.handleChange}
@@ -50,8 +50,10 @@ class EditNoteForm extends Component {
               placeholder="Edit note selected" 
             />
           </FormGroup>
-          <Button type="submit" bsSize="small">Update</Button>
-          <Button type="submit" bsSize="small" onClick={this.cancelUpdate}>Cancel</Button>
+          <ButtonToolbar>
+            <Button type="submit" bsSize="small">Update</Button>
+            <Button type="submit" bsSize="small" onClick={this.cancelUpdate}>Cancel</Button>
+          </ButtonToolbar>
         </form>
       </div>
     );
